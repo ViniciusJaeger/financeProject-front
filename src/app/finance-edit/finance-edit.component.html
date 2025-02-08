@@ -1,0 +1,37 @@
+<div>
+    <h2 mat-dialog-title>Editar despesa</h2>
+    <mat-card-content class="dialog-container">
+        <form class="dialog-input-container" [formGroup]="expenseForm">
+            <mat-form-field>
+                <mat-label>Data da compra</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Método de pagamento</mat-label>
+                <input matInput formControlName="paymentMethod" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Atividade</mat-label>
+                <input matInput formControlName="activity" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Entradas</mat-label>
+                <input matInput formControlName="entrances" />
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Saídas</mat-label>
+                <input matInput formControlName="bills" />
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <div class="button-dialog-container">
+        <div class="button-dialog">
+            <button mat-raised-button (click)="onCancel()">Cancelar</button>
+        </div>
+        <div class="button-dialog">
+            <button mat-flat-button class="custom-button" (click)="onSubmit()">Salvar</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="card-upload-container">
+    <div class="card-upload-title">
+        <h2>Escolha o arquivo</h2>
+    </div>
+    <div class="card-upload-buttons">
+        <input type="file" #fileInput (change)="handleFileInput($event)" hidden />
+        <button class="custom-button" mat-flat-button  (click)="fileInput.click()">Selecionar Arquivo</button>
+        <button class="custom-button" mat-flat-button (click)="uploadFile()">Enviar Arquivo</button>
+    </div>
+</div>

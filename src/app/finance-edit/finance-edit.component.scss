@@ -1,0 +1,31 @@
+$siteDefaultColor: #F27405;
+$colorText: #fff;
+
+.dialog-container {
+    width: 500px;
+}
+
+.custom-button {
+    background-color: $siteDefaultColor !important;
+    color: $colorText !important;
+    width: 100px;
+    padding: 10px;
+}
+
+.button-dialog-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+}
+
+.button-dialog {
+    padding: 10px;
+}
+
+.dialog-input-container {
+    width: 400px;
+    padding: 20px;
+    display: flex; 
+    flex-direction: column;
+}

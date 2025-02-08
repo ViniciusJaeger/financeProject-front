@@ -1,0 +1,91 @@
+<div class="navbar-container">
+  <div class="navbar">
+    <div>
+      <h3 class="title-navbar">Registros das despesas</h3>
+    </div>
+    <div class="container-total-expenses">
+      <div class="total-card total-bills-card">
+        <div class="total-card-title">Total Gasto</div>
+        <div class="total-card-value">{{ totalBillsPerMonth.toFixed(2) }}</div>
+      </div>
+      <div class="total-card total-entrances-card">
+        <div class="total-card-title">Total Entradas</div>
+        <div class="total-card-value">{{ totalEntrancesPerMonth.toFixed(2) }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="search-container">
+    <app-search (searchTextChanged)="onSearchYear($event)"></app-search>
+  </div>
+  <div><button mat-flat-button class="custom-button" (click)="addSheetDialog()">+ Nova planilha</button></div>
+</div>
+<div class="panel-def-container" >
+
+  @for(expense of expenses; track expense){
+    <div class="accordion-container">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="panel-title-container"> {{ expense.name }} </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="container-options-panel">
+          <div class="search-container-table">
+            <app-search (searchTextChanged)="onSearchTextEntered(expense, $event)"></app-search>
+            <section class="checkbox-container">
+              <p><mat-checkbox (change)="onChecked(expense, 'CREDIT_CARD', $event.checked)">Crédito</mat-checkbox></p>
+              <p><mat-checkbox (change)="onChecked(expense, 'DEBIT_CARD', $event.checked)">Débito</mat-checkbox></p>
+              <p><mat-checkbox (change)="onChecked(expense, 'PIX', $event.checked)">PIX</mat-checkbox></p>
+            </section>
+          </div>
+          <div class="container-total-expenses">
+            <div class="total-card total-bills-card">
+              <div class="total-card-title">Total Gasto</div>
+              <div class="total-card-value">{{ sumBillsExpensePerMonth(expense) }}</div>
+            </div>
+            <div class="total-card total-entrances-card">
+              <div class="total-card-title">Total Entradas</div>
+                <div class="total-card-value">{{ sumEntrancesExpensePerMonth(expense) }}</div>    
+            </div>
+          </div>
+        </div>
+        <table mat-table [dataSource]="expense.expenseDetailVO" class="table-expenses mat-elevation-z8">
+          <ng-container matColumnDef="dateOfPurchase">
+            <th mat-header-cell *matHeaderCellDef> Data da compra </th>
+            <td mat-cell *matCellDef="let expenses"> {{expenses.date | date:'dd/MM/yyyy'}} </td>
+          </ng-container>
+          <ng-container matColumnDef="paymentMethod">
+            <th mat-header-cell *matHeaderCellDef> Método de pagamento </th>
+            <td mat-cell *matCellDef="let expenses"> {{expenses.paymentMethod | paymentMethodTranslation}} </td>
+          </ng-container>
+          <ng-container matColumnDef="activity">
+            <th mat-header-cell *matHeaderCellDef> Atividade </th>
+            <td mat-cell *matCellDef="let expenses"> {{expenses.activity}} </td>
+          </ng-container>
+          <ng-container matColumnDef="entrances">
+            <th mat-header-cell *matHeaderCellDef> Entradas </th>
+            <td mat-cell *matCellDef="let expenses"> {{expenses.entrances}} </td>
+          </ng-container>
+          <ng-container matColumnDef="bills">
+            <th mat-header-cell *matHeaderCellDef> Saídas </th>
+            <td mat-cell *matCellDef="let expenses"> {{expenses.bills}} </td>
+          </ng-container>
+          <ng-container matColumnDef="edit-delete">
+            <th mat-header-cell *matHeaderCellDef> Editar/deletar </th>
+            <td mat-cell *matCellDef="let expenses"> <div class="edit-delete-container">
+              <div class="button-action">
+                <button mat-raised-button (click)="openDialog(expenses)">Editar</button>
+              </div>
+              <div class="button-action">
+              <button mat-raised-button (click)="deleteExpenseDialog(expenses)">Deletar</button>
+            </div></div> </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  }
+</div>
