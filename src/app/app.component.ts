@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { FinanceExpenesesDashboardComponent } from "./finance-expeneses-dashboard/finance-expeneses-dashboard.component";
 import { RouterOutlet } from '@angular/router';
+import { HomeComponent } from './core/layout/components/home/home.component';
 
 @Component({
   selector: 'app-root',
   standalone: true, 
-  imports: [RouterOutlet, FinanceExpenesesDashboardComponent],
+  imports: [
+    RouterOutlet,
+    HomeComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
